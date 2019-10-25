@@ -1,5 +1,7 @@
 package com.cx.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cx.demo.entity.TUserFrameLog;
 import com.cx.demo.mapper.TUserFrameLogMapper;
 import com.cx.demo.service.TUserFrameLogService;
@@ -26,5 +28,16 @@ public class TUserFrameLogServiceImpl extends ServiceImpl<TUserFrameLogMapper, T
     @Override
     public List<TUserFrameLog> findByTUser() {
         return tUserFrameLogMapper.findByTUser();
+    }
+
+    @Override
+    public IPage<TUserFrameLog> selePage(int page, int pagesize)throws RuntimeException {
+        try {
+            Page<TUserFrameLog> p = new Page<>(page,pagesize);
+            p.setRecords(tUserFrameLogMapper.selectPageExt(p));
+            return p;
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

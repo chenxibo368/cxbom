@@ -13,4 +13,12 @@
 <select id="findByTUser" resultMap="BaseResultMap">
   select * from t_user_frame_log
 </select>
+
+    <select id="selectPageExt" resultMap="BaseResultMap">
+        select
+        *
+        from  t_user_frame_log
+
+    </select>
+
 </mapper>
