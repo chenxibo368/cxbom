@@ -1,5 +1,6 @@
 package com.cx.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cx.demo.entity.TUserFrameLog;
@@ -33,9 +34,18 @@ public class TUserFrameLogServiceImpl extends ServiceImpl<TUserFrameLogMapper, T
     @Override
     public IPage<TUserFrameLog> selePage(int page, int pagesize)throws RuntimeException {
         try {
+//            Page<TUserFrameLog> p = new Page<>(page,pagesize);
+//            p.setRecords(tUserFrameLogMapper.selectPageExt(p));
+//            return p;
+
             Page<TUserFrameLog> p = new Page<>(page,pagesize);
-            p.setRecords(tUserFrameLogMapper.selectPageExt(p));
-            return p;
+            QueryWrapper<TUserFrameLog> wrapper = new QueryWrapper<>();
+            wrapper.eq("id",1);
+
+            wrapper.orderByAsc("id");
+
+            IPage<TUserFrameLog> userIPage = baseMapper.selectPage(p, wrapper);
+            return userIPage;
         }catch (Exception e){
             throw new RuntimeException(e.getMessage());
         }
