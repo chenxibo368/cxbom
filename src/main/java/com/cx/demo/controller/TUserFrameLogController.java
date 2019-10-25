@@ -1,6 +1,7 @@
 package com.cx.demo.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cx.demo.entity.TUserFrameLog;
 import com.cx.demo.service.TUserFrameLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,17 @@ public class TUserFrameLogController {
 
     @RequestMapping("/u")
     @ResponseBody
-    public String xxaaaa (){
-        TUserFrameLog qsdd = tUserFrameLogService.getById(1);
-        System.out.print("----"+qsdd.getJlDate()+"----"+qsdd.getAppCode());
+    public IPage<TUserFrameLog> xxaaaa (){
+//        TUserFrameLog qsdd = tUserFrameLogService.getById(1);
+ //       System.out.print("----"+qsdd.getJlDate()+"----"+qsdd.getAppCode());
+        int page=1;//当前页
+        int pageSize=2;//页面接收数据大小
+        IPage<TUserFrameLog> sdqqq = tUserFrameLogService.selePage(page,pageSize);
+
         List<TUserFrameLog> sdaa = tUserFrameLogService.findByTUser();
         for(TUserFrameLog a : sdaa){
             System.out.println(a.toString());
         }
-        return "111";
+        return sdqqq;
     }
 }

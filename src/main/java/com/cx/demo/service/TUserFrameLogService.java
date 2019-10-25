@@ -1,5 +1,6 @@
 package com.cx.demo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.cx.demo.entity.TUserFrameLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,4 +17,8 @@ import java.util.List;
 public interface TUserFrameLogService extends IService<TUserFrameLog> {
 
     List<TUserFrameLog> findByTUser();
+
+    IPage<TUserFrameLog> selePage(int page,int pagesize)throws RuntimeException;
+
+
 }
